@@ -261,7 +261,7 @@ module.exports = function (grunt) {
       target: {
         src: '<%%= yeoman.client %>/index.html',
         ignorePath: '<%%= yeoman.client %>/',
-        exclude: [/bootstrap-sass-official/, /bootstrap.js/, '/json3/', '/es5-shim/'<% if(!filters.css) { %>, /bootstrap.css/, /font-awesome.css/ <% } %>]
+        exclude: [/bootstrap-sass-official/, /bootstrap.js/, '/json3/', '/es5-shim/'<% if(!filters.css) { %>, /bootstrap.css/, /font-awesome.css/ , '/foundation/css/'<% } %>]
       }
     },
 
@@ -582,7 +582,8 @@ module.exports = function (grunt) {
           compass: false
         },
         files: {
-          '.tmp/app/app.css' : '<%%= yeoman.client %>/app/app.scss'
+          '.tmp/app/app.css' : '<%%= yeoman.client %>/app/app.scss'/*<% if(filters.foundation) {%>,
+          '.tmp/app/foundation.css' : '<%%= yeoman.client %>/bower_components/foundation/scss/foundation.scss' <%} %>*/
         }
       }
     },<% } %><% if(filters.less) { %>

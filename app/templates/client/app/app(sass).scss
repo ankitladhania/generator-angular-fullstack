@@ -2,6 +2,12 @@
 $fa-font-path: "/bower_components/font-awesome/fonts";
 <% if(filters.bootstrap) { %>
 @import 'bootstrap-sass-official/vendor/assets/stylesheets/bootstrap';<% } %>
+
+
+<% if(filters.foundation) { %>
+@import 'foundation/scss/normalize';
+@import 'foundation/scss/foundation'; <% } %>
+
 @import 'font-awesome/scss/font-awesome';
 
 /**

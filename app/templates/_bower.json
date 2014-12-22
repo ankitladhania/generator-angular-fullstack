@@ -4,14 +4,16 @@
   "dependencies": {
     "angular": ">=1.2.*",
     "json3": "~3.3.1",
-    "es5-shim": "~3.0.1",<% if(filters.bootstrap) { %><% if (filters.sass) { %>
+    "es5-shim": "~3.0.1",<% if(filters.bootstrap) { console.log(filters) %><% if (filters.sass) { %>
     "bootstrap-sass-official": "~3.1.1",<% } %>
-    "bootstrap": "~3.1.1",<% } %>
+    "bootstrap": "~3.1.1",<% } %><% if(filters.foundation) { console.log(filters) %>
+    "foundation": "~5.4.4",<% } %>
     "angular-resource": ">=1.2.*",
     "angular-cookies": ">=1.2.*",
     "angular-sanitize": ">=1.2.*",<% if(filters.ngroute) { %>
     "angular-route": ">=1.2.*",<% } %><% if(filters.uibootstrap) { %>
-    "angular-bootstrap": "~0.11.0",<% } %>
+    "angular-bootstrap": "~0.11.0",<% } %><% if(filters.ngfoundation) { %>
+    "angular-foundation": "~0.5.0",<% } %>
     "font-awesome": ">=4.1.0",
     "lodash": "~2.4.1"<% if(filters.socketio) { %>,
     "angular-socket-io": "~0.6.0"<% } %><% if(filters.uirouter) { %>,

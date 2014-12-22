@@ -136,9 +136,10 @@ module.exports = function (grunt) {
         markup: 'html',
         stylesheet: 'sass',
         router: 'uirouter',
-        bootstrap: true,
-        uibootstrap: true,
-        mongoose: true,
+        cssframework :'foundation',
+        uibootstrap : false,
+        ngfoundation : true,
+        mongoose: false,
         auth: true,
         oauth: ['googleAuth', 'twitterAuth'],
         socketio: true
@@ -153,7 +154,6 @@ module.exports = function (grunt) {
       ];
 
       var gen = helpers.createGenerator('angular-fullstack:app', deps);
-
       helpers.mockPrompt(gen, options);
       gen.run({}, function () {
         deferred.resolve();

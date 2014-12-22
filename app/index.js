@@ -62,7 +62,7 @@ var AngularFullstackGenerator = yeoman.generators.Base.extend({
   clientPrompts: function() {
     if(this.skipConfig) return;
     var cb = this.async();
-
+    var _this = this;
     this.log('# Client\n');
 
     this.prompt([{
@@ -99,23 +99,41 @@ var AngularFullstackGenerator = yeoman.generators.Base.extend({
         choices: [ "ngRoute", "uiRouter"],
         filter: function( val ) { return val.toLowerCase(); }
       }, {
-        type: "confirm",
-        name: "bootstrap",
-        message: "Would you like to include Bootstrap?"
-      }, {
+        type: "list",
+        name: "cssframework",
+        default: 1,
+        message: "What CSS Framework would you like to use?",
+        choices: [ "Twitter Bootstrap 3", "Zurb Foundation 5","No Framework"],
+        filter: function( val ) { 
+          var filterMap = {
+            'Twitter Bootstrap 3': 'bootstrap',
+            'Zurb Foundation 5': 'foundation',
+            'No Framework' : 'nofr'
+          };
+          return filterMap[val];
+        }
+      },{
         type: "confirm",
         name: "uibootstrap",
         message: "Would you like to include UI Bootstrap?",
         when: function (answers) {
-          return answers.bootstrap;
+          return answers.cssframework === 'bootstrap';
+        }
+      },{
+        type: "confirm",
+        name: "ngfoundation",
+        message: "Would you like to include Angular Foundation ?",
+        when: function (answers) {
+          return answers.cssframework === 'foundation';
         }
       }], function (answers) {
         this.filters[answers.script] = true;
         this.filters[answers.markup] = true;
         this.filters[answers.stylesheet] = true;
         this.filters[answers.router] = true;
-        this.filters.bootstrap = !!answers.bootstrap;
+        this.filters[answers.cssframework] = true;
         this.filters.uibootstrap =  !!answers.uibootstrap;
+        this.filters.ngfoundation =  !!answers.ngfoundation;
       cb();
       }.bind(this));
   },
@@ -235,8 +253,8 @@ var AngularFullstackGenerator = yeoman.generators.Base.extend({
 
   ngModules: function() {
     this.filters = this._.defaults(this.config.get('filters'), {
-      bootstrap: true,
-      uibootstrap: true
+      uibootstrap: true,
+      ngfoundation : true
     });
 
     var angModules = [
@@ -248,6 +266,7 @@ var AngularFullstackGenerator = yeoman.generators.Base.extend({
     if(this.filters.socketio) angModules.push("'btford.socket-io'");
     if(this.filters.uirouter) angModules.push("'ui.router'");
     if(this.filters.uibootstrap) angModules.push("'ui.bootstrap'");
+    if(this.filters.ngfoundation) angModules.push("'mm.foundation'");
 
     this.angularModules = "\n  " + angModules.join(",\n  ") +"\n";
   },
