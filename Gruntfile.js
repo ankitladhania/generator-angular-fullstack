@@ -136,10 +136,10 @@ module.exports = function (grunt) {
         markup: 'html',
         stylesheet: 'sass',
         router: 'uirouter',
-        cssframework :'foundation',
-        uibootstrap : false,
+        cssframework :['foundation','bootstrap'],
+        uibootstrap : true,
         ngfoundation : true,
-        mongoose: false,
+        mongoose: true,
         auth: true,
         oauth: ['googleAuth', 'twitterAuth'],
         socketio: true
